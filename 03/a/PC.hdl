@@ -17,9 +17,14 @@ CHIP PC {
 
     PARTS:
     // Put your code here:
-    Mux16(a=tryload, b=false, sel=reset, out=newin);
-    Mux16(a=tryinc, b=in, sel=load, out=tryload);
-    Inc16(in=oldout, out=oldoutinc);
-    Mux16(a=oldout, b=oldoutinc, sel=inc, out=tryinc);
-    Register(in=newin, load=true, out=oldout, out=out);
+    Inc16(in=stay, out=stayplus); 
+    Mux16(a=stay, b=stayplus, sel=inc, out=incout); // if inc is 1, increment the last out
+    Mux16(a=incout, b=in, sel=load, out=lodout); // if load is 1, ignore all above and set in
+    Mux16(a=lodout, b=false, sel=reset, out=rstout);  //if reset is 1, ignore all above and set 0
+    Or(a=load, b=inc, out=orhub);
+    Or(a=orhub, b=reset, out=loadinreg); // load Or inc Or reset | if no one turned on, no changes
+    Register(in=rstout, load=loadinreg, out=stay, out=out);
+
+
+
 }

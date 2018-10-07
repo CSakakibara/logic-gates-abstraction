@@ -15,7 +15,7 @@ CHIP Bit {
 
     PARTS:
     // Put your code here:
-    Mux(a=stay, b=in, sel=load, out=follow);
-    DFF(in=follow, out=stay, out=out);
+    Mux(a=stay, b=in, sel=load, out=follow); //if (load == 0) "keep the last out" else send the new in
+    DFF(in=follow, out=stay, out=out); // show the selected and "save" the last out
     
 }
