@@ -36,7 +36,7 @@ class SymbolTable:
 class Command:
     def __init__(self):
         self.type = None
-        self.line = 0
+        self.line = 0 
 
         self.symbol = None       
         self.destination = None  
