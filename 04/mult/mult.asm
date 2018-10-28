@@ -8,32 +8,29 @@
 
 // Put your code here.
 
-@R1
-D=M
+@R2 
+M=0  // 0 de R2 shokka suru
+@R1 
+D=M  // take the secound number
 @i
-M=D
+M=D  // save it to repeat the sum that much of times
 
-
-@R2
-M=0
-
-(LOOP)
-
+(MULT)
 @i
 D=M
 @END
-D;JEQ
+D;JEQ // end the cicle if i = 0
 
 @R0
 D=M
 @R2
-M=D+M
+M=D+M // in the first cicle sums 0 + the first number, and accumulate for the next cicle
 
-@i
-M=M-1
+@i 
+M=M-1 // count how many times it was added
 
-@LOOP
-0; JMP
+@MULT 
+0; JMP // go to next cicle
 
 
 (END)

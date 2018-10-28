@@ -13,10 +13,10 @@
 
 // Put your code here.
 
-(RESET) 
+(INIT) 
 	@SCREEN
 	D=A
-	@cur_screen_word 
+	@act 	
 	M=D
 
 (LOOP)	
@@ -30,7 +30,7 @@
 	0; JMP
 	
 (FILL)
-	@cur_screen_word
+	@act
 	A=M
 	M=-1
 	
@@ -38,7 +38,7 @@
 	0; JMP
 	
 (BLANK)
-	@cur_screen_word
+	@act
 	A=M
 	M=0
 	
@@ -46,12 +46,13 @@
 	0; JMP
 	
 (CHECK) 
-	@cur_screen_word
-	MD=M+1
+	@act
+	M=M+1
+	D=M+1
 	@KBD
 	D=D-A
 	
-	@RESET 
+	@INIT 
 	D; JEQ
 	
 	@LOOP 
