@@ -3,7 +3,7 @@
 // by Nisan and Schocken, MIT Press.
 // File name: projects/04/Fill.asm
 
-// Runs an infinite loop that listens to the keyboard input.
+// Runs an that listens to the keyboard input.
 // When a key is pressed (any key), the program blackens the screen,
 // i.e. writes "black" in every pixel;
 // the screen should remain fully black as long as the key is pressed. 
@@ -13,47 +13,47 @@
 
 // Put your code here.
 
-(INIT) 
+(LOOP) 
 	@SCREEN
 	D=A
 	@act 	
-	M=D
+	M=D  // store the position of screen map
 
-(LOOP)	
+(SWITCH)	
 	@KBD
-	D=M
+	D=M  
 	
-	@FILL 
-	D; JGT
+	@FILL   
+	D; JNE  // if keyboard not equals to 0, go to fill
 	
-	@BLANK 
+	@BLANK  //else go to blank
 	0; JMP
 	
 (FILL)
 	@act
-	A=M
-	M=-1
+	A=M  //go to position stored
+	M=-1 // fill all bits 
 	
-	@CHECK
+	@VERIF
 	0; JMP
 	
 (BLANK)
 	@act
-	A=M
-	M=0
+	A=M // go to position stored
+	M=0 // erase all
 	
-	@CHECK
+	@VERIF
 	0; JMP
 	
-(CHECK) 
+(VERIF) 
 	@act
 	M=M+1
 	D=M+1
 	@KBD
-	D=D-A
+	D=D-A  // to verify if the screenmap is over
 	
-	@INIT 
-	D; JEQ
+	@LOOP
+	D; JEQ 
 	
-	@LOOP 
+	@SWITCH 
 	0; JMP
